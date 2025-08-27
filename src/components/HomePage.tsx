@@ -73,9 +73,9 @@ export function HomePage() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="mb-8"
           >
-            <Badge className="inline-flex items-center gap-3 px-6 py-3 text-lg bg-white/5 backdrop-blur-lg border border-white/10 hover:border-blue-500/30 transition-all duration-300">
+            <Badge className="inline-flex items-center gap-3 px-6 py-3 text-lg bg-blue-600 backdrop-blur-lg border border-blue-500 hover:border-blue-400 transition-all duration-300">
               <Zap className="w-5 h-5 text-blue-400 animate-pulse" />
-              <span className="font-medium text-blue-100">AI-Powered Ad Creation Studio</span>
+              <span className="font-medium text-white">AI-Powered Ad Creation Studio</span>
               <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
             </Badge>
           </motion.div>
@@ -106,7 +106,7 @@ export function HomePage() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-xl md:text-2xl text-gray-300 mb-12 max-w-4xl mx-auto leading-relaxed font-medium tracking-wide"
+            className="text-xl md:text-2xl text-white mb-12 max-w-4xl mx-auto leading-relaxed font-medium tracking-wide"
           >
             Turn ideas into professional ads with AI-powered scripts, visuals, and music.
           </motion.p>
@@ -146,14 +146,14 @@ export function HomePage() {
             ].map((stat, index) => (
               <motion.div
                 key={index}
-                className="text-center p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-white/20 transition-all duration-300"
+                className="text-center p-6 rounded-2xl bg-gray-800 backdrop-blur-sm border border-gray-600 hover:border-gray-500 transition-all duration-300"
                 whileHover={{ scale: 1.05 }}
               >
                 <div className="text-4xl mb-2">{stat.icon}</div>
                 <div className="text-3xl md:text-4xl font-extrabold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent mb-2">
                   {stat.number}
                 </div>
-                <div className="text-gray-400 font-medium tracking-wide">{stat.label}</div>
+                <div className="text-white font-medium tracking-wide">{stat.label}</div>
               </motion.div>
             ))}
           </motion.div>
@@ -176,7 +176,7 @@ export function HomePage() {
                 Projects
               </span>
             </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed font-medium tracking-wide">
+            <p className="text-xl text-white max-w-3xl mx-auto leading-relaxed font-medium tracking-wide">
               Explore our latest AI-generated ad campaigns and see the power of creative automation in action.
             </p>
           </motion.div>
@@ -202,7 +202,7 @@ export function HomePage() {
                   }}
                   className="group perspective-1000"
                 >
-                  <Card className="relative overflow-hidden bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl hover:border-blue-500/30 transition-all duration-500 hover:shadow-2xl">
+                  <Card className="relative overflow-hidden bg-gray-800 backdrop-blur-xl border border-gray-600 rounded-3xl hover:border-blue-500 transition-all duration-500 hover:shadow-2xl">
                     <div className="relative">
                       <img
                         src={project.thumbnail}
@@ -211,18 +211,18 @@ export function HomePage() {
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                       <div className="absolute top-4 right-4">
-                        <Badge className="bg-blue-600/80 text-white border-0">
+                        <Badge className="bg-blue-600 text-white border-0">
                           {project.duration}
                         </Badge>
                       </div>
                       <div className="absolute bottom-4 left-4 right-4">
-                        <Badge variant="secondary" className="bg-gray-800/80 text-gray-300 mb-2">
+                        <Badge variant="secondary" className="bg-gray-800 text-white mb-2">
                           {project.category}
                         </Badge>
                         <h3 className="text-white font-bold text-lg mb-1 group-hover:text-blue-400 transition-colors">
                           {project.name}
                         </h3>
-                        <div className="flex items-center gap-2 text-gray-400 text-sm">
+                        <div className="flex items-center gap-2 text-white text-sm">
                           <Calendar className="w-4 h-4" />
                           <span>{project.date}</span>
                         </div>
@@ -231,7 +231,7 @@ export function HomePage() {
                     
                     <div className="p-6">
                       <div className="flex items-center justify-between">
-                        <Button size="sm" variant="outline" className="border-gray-600 text-gray-300 hover:bg-gray-800">
+                        <Button size="sm" variant="outline" className="border-gray-600 text-white hover:bg-gray-800">
                           <Eye className="w-4 h-4 mr-2" />
                           Preview
                         </Button>
@@ -309,7 +309,7 @@ export function HomePage() {
                   }}
                   className="group perspective-1000"
                 >
-                  <Card className="relative p-8 h-full bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl hover:border-white/20 transition-all duration-500 hover:shadow-2xl overflow-hidden">
+                  <Card className="relative p-8 h-full bg-gray-800 backdrop-blur-xl border border-gray-600 rounded-3xl hover:border-gray-500 transition-all duration-500 hover:shadow-2xl overflow-hidden">
                     <div className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500`} />
                     
                     <div className={`w-16 h-16 rounded-2xl bg-gradient-to-r ${feature.gradient} p-4 group-hover:scale-110 transition-transform duration-300 shadow-lg mb-6`}>
@@ -320,7 +320,7 @@ export function HomePage() {
                       {feature.title}
                     </h3>
                     
-                    <p className="text-gray-300 text-lg leading-relaxed group-hover:text-gray-200 transition-colors duration-300 font-medium tracking-wide">
+                    <p className="text-white text-lg leading-relaxed group-hover:text-gray-100 transition-colors duration-300 font-medium tracking-wide">
                       {feature.description}
                     </p>
 
@@ -354,12 +354,12 @@ export function HomePage() {
                   <h3 className="text-4xl font-extrabold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
                     AdSnap
                   </h3>
-                  <p className="text-gray-400 mt-2 text-lg font-medium">
+                  <p className="text-white mt-2 text-lg font-medium">
                     AI-Powered Ad Creation Studio
                   </p>
                 </motion.div>
                 
-                <p className="text-gray-300 text-lg leading-relaxed mb-8 max-w-md font-medium tracking-wide">
+                <p className="text-white text-lg leading-relaxed mb-8 max-w-md font-medium tracking-wide">
                   Transform your ideas into viral video ads instantly. 
                   Join thousands of creators who trust AdSnap for their marketing success.
                 </p>
@@ -367,11 +367,11 @@ export function HomePage() {
                 {/* Newsletter Signup */}
                 <div className="flex gap-3">
                   <div className="flex-1 relative">
-                    <Mail className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                    <Mail className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-white" />
                     <input
                       type="email"
                       placeholder="Enter your email"
-                      className="w-full pl-12 pr-4 py-3 bg-gray-800/50 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all duration-300"
+                      className="w-full pl-12 pr-4 py-3 bg-gray-800 border border-gray-600 rounded-xl text-white placeholder-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500 transition-all duration-300"
                     />
                   </div>
                   <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 px-6 rounded-xl font-bold">
@@ -388,7 +388,7 @@ export function HomePage() {
                     <li key={link}>
                       <motion.a
                         href="#"
-                        className="text-gray-400 hover:text-white transition-colors duration-200 font-medium tracking-wide"
+                        className="text-white hover:text-blue-300 transition-colors duration-200 font-medium tracking-wide"
                         whileHover={{ x: 5 }}
                       >
                         {link}
@@ -405,7 +405,7 @@ export function HomePage() {
                     <li key={link}>
                       <motion.a
                         href="#"
-                        className="text-gray-400 hover:text-white transition-colors duration-200 font-medium tracking-wide"
+                        className="text-white hover:text-blue-300 transition-colors duration-200 font-medium tracking-wide"
                         whileHover={{ x: 5 }}
                       >
                         {link}
@@ -428,7 +428,7 @@ export function HomePage() {
                   <motion.a
                     key={social.label}
                     href={social.href}
-                    className={`w-14 h-14 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 hover:border-white/20 flex items-center justify-center text-gray-400 ${social.color} transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/20`}
+                    className={`w-14 h-14 rounded-full bg-gray-800 backdrop-blur-sm border border-gray-600 hover:border-gray-500 flex items-center justify-center text-white ${social.color} transition-all duration-300 hover:shadow-lg hover:shadow-blue-500`}
                     whileHover={{ scale: 1.1, y: -2 }}
                     whileTap={{ scale: 0.95 }}
                     initial={{ opacity: 0, y: 20 }}
@@ -443,13 +443,13 @@ export function HomePage() {
             </div>
 
             {/* Bottom Section */}
-            <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/10">
+            <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-gray-600">
               <motion.div
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
                 viewport={{ once: true }}
-                className="flex items-center gap-2 text-gray-400 mb-4 md:mb-0 font-medium tracking-wide"
+                className="flex items-center gap-2 text-white mb-4 md:mb-0 font-medium tracking-wide"
               >
                 <span>© 2024 AdSnap. All rights reserved.</span>
                 <span className="hidden md:inline">•</span>
@@ -468,7 +468,7 @@ export function HomePage() {
                   variant="outline"
                   size="sm"
                   onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                  className="border-gray-600 text-gray-400 hover:text-white hover:border-gray-500 hover:bg-white/5 backdrop-blur-sm font-bold"
+                  className="border-gray-600 text-white hover:text-blue-300 hover:border-gray-500 hover:bg-gray-800 backdrop-blur-sm font-bold"
                 >
                   <ArrowRight className="w-4 h-4 mr-2 rotate-[-90deg]" />
                   Back to Top

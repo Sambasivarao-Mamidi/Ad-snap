@@ -13,7 +13,16 @@ import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { Home, Menu, Wand2, Sparkles, FileText, Layers, Music, Video, Calendar, Clock, Film, X, Brain, Eye, Download, Copy, Play } from 'lucide-react';
+import { Home, Menu, Wand2, Sparkles, FileText, Layers, Music, Video, Calendar, Clock, Film, X, Brain, Eye, Download, Copy, Play, Edit, Save } from 'lucide-react';
+
+interface Scene {
+  id: number;
+  title: string;
+  duration: string;
+  description: string;
+  script: string;
+  visual: string;
+}
 
 export function StudioPage() {
   const navigate = useNavigate();
@@ -27,7 +36,10 @@ export function StudioPage() {
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [activeTab, setActiveTab] = useState('preview');
-  const [generatedScenes, setGeneratedScenes] = useState<any[]>([]);
+  const [generatedScenes, setGeneratedScenes] = useState<Scene[]>([]);
+  const [editingScene, setEditingScene] = useState<Scene | null>(null);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [showPulse, setShowPulse] = useState(false);
   const [adDescription, setAdDescription] = useState('');
 
   const steps = [
@@ -129,6 +141,16 @@ export function StudioPage() {
     setIsPanelOpen(!isPanelOpen);
   };
 
+  const handleSceneEdit = (updatedScene: Scene) => {
+    setGeneratedScenes(scenes => 
+      scenes.map(scene => 
+        scene.id === updatedScene.id ? updatedScene : scene
+      )
+    );
+    setIsEditModalOpen(false);
+    setEditingScene(null);
+  };
+
   const handleGenerate = async () => {
     if (!adDescription.trim()) return;
     
@@ -190,6 +212,9 @@ export function StudioPage() {
       setCurrentStep(0);
       setStatusText('');
       setActiveTab('preview');
+      // Trigger pulse effect
+      setShowPulse(true);
+      setTimeout(() => setShowPulse(false), 3000);
     }, 500);
   };
 
@@ -449,31 +474,6 @@ export function StudioPage() {
                     </div>
                   </div>
 
-                  {/* Progress Bar (when generating) */}
-                  <AnimatePresence>
-                    {isGenerating && (
-                      <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        exit={{ opacity: 0, height: 0 }}
-                        className="mb-6 p-6 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl"
-                      >
-                        <div className="flex justify-between items-center mb-4">
-                          <span className="text-lg font-bold text-white">Generating Your Ad</span>
-                          <span className="text-lg text-blue-400 font-bold">{progress}%</span>
-                        </div>
-                        <Progress value={progress} className="h-3 bg-gray-800 mb-4" />
-                        <motion.p 
-                          key={statusText}
-                          initial={{ opacity: 0, y: 10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          className="text-gray-400 text-center"
-                        >
-                          {statusText}
-                        </motion.p>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
 
                   {/* Generate Button */}
                   <Button
@@ -512,33 +512,36 @@ export function StudioPage() {
               >
                 <Card className="flex flex-col h-full p-6 lg:p-8 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl sm:rounded-3xl shadow-2xl">
                   <Tabs value={activeTab} onValueChange={setActiveTab} className="flex flex-col h-full">
-                    <div className="flex items-center justify-between mb-6">
-                      <TabsList className="grid w-full grid-cols-2 bg-gray-800/50 rounded-xl sm:rounded-2xl p-1 sm:p-2 max-w-md">
-                        <TabsTrigger value="preview" className="rounded-lg sm:rounded-xl data-[state=active]:bg-blue-600 data-[state=active]:text-white font-bold transition-all duration-300 text-sm sm:text-base">
-                          <Eye className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
-                          <span className="hidden sm:inline">Live Preview</span>
-                          <span className="sm:hidden">Preview</span>
-                        </TabsTrigger>
-                        <TabsTrigger value="storyboard" className="rounded-lg sm:rounded-xl data-[state=active]:bg-purple-600 data-[state=active]:text-white font-bold transition-all duration-300 text-sm sm:text-base">
-                          <Layers className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
-                          <span className="hidden sm:inline">Storyboard</span>
-                          <span className="sm:hidden">Story</span>
-                        </TabsTrigger>
-                      </TabsList>
-                      
-                      <div className="flex gap-2">
-                        <Button size="sm" variant="outline" className="border-gray-600 text-gray-300 hover:bg-gray-800 text-xs sm:text-sm">
+                    <div className="flex items-center justify-center mb-6 relative">
+                      <div className="flex items-center gap-4 sm:gap-6">
+                        <TabsList className="grid grid-cols-2 bg-gray-800/50 rounded-xl sm:rounded-2xl p-2">
+                          <TabsTrigger 
+                            value="preview" 
+                            className="rounded-lg sm:rounded-xl data-[state=active]:bg-blue-600 data-[state=active]:text-white data-[state=active]:shadow-[0_0_20px_rgba(59,130,246,0.5)] font-bold transition-all duration-300 text-sm sm:text-base flex items-center justify-center px-3 sm:px-4 py-2"
+                          >
+                            <Eye className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+                            <span className="hidden sm:inline">Live Preview</span>
+                            <span className="sm:hidden">Preview</span>
+                          </TabsTrigger>
+                          <TabsTrigger 
+                            value="storyboard" 
+                            className="rounded-lg sm:rounded-xl data-[state=active]:bg-purple-600 data-[state=active]:text-white data-[state=active]:shadow-[0_0_20px_rgba(147,51,234,0.5)] font-bold transition-all duration-300 text-sm sm:text-base flex items-center justify-center px-3 sm:px-4 py-2"
+                          >
+                            <Layers className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+                            <span className="hidden sm:inline">Storyboard</span>
+                            <span className="sm:hidden">Story</span>
+                          </TabsTrigger>
+                        </TabsList>
+                        
+                        <Button size="sm" variant="outline" className="border-gray-600 text-gray-300 hover:bg-gray-800 text-xs sm:text-sm px-3 sm:px-4 py-2">
                           <Download className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
                           <span className="hidden sm:inline">Export</span>
-                        </Button>
-                        <Button size="sm" variant="outline" className="border-gray-600 text-gray-300 hover:bg-gray-800">
-                          <Copy className="w-3 h-3 sm:w-4 sm:h-4" />
                         </Button>
                       </div>
                     </div>
 
                     <TabsContent value="preview" className="h-full flex flex-col flex-1">
-                      <div className="flex-1 h-full bg-gradient-to-br from-gray-800/50 to-gray-900/50 rounded-2xl flex flex-col min-h-[500px] relative overflow-hidden">
+                      <div className={`flex-1 h-full bg-gradient-to-br from-gray-800/50 to-gray-900/50 rounded-2xl flex flex-col min-h-[500px] relative overflow-hidden transition-all duration-1000 ${showPulse ? 'shadow-[0_0_50px_rgba(59,130,246,0.6)] ring-2 ring-blue-500/50' : ''}`}>
                         {/* Progress Tracker - Inside Live Preview Tab */}
                         <AnimatePresence>
                           {isGenerating && (
@@ -637,9 +640,17 @@ export function StudioPage() {
                                 <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 flex items-center justify-center mb-4 sm:mb-6 mx-auto shadow-lg">
                                   <Video className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
                                 </div>
-                                <h4 className="text-lg sm:text-xl font-bold text-white mb-2">
+                                <motion.h4 
+                                  className="text-lg sm:text-xl font-bold text-white mb-2"
+                                  initial={{ opacity: 0, scale: 0.8 }}
+                                  animate={{ opacity: 1, scale: 1 }}
+                                  transition={{ duration: 0.6, delay: 0.2 }}
+                                  style={{
+                                    textShadow: '0 0 20px rgba(59, 130, 246, 0.8), 0 0 40px rgba(59, 130, 246, 0.4)'
+                                  }}
+                                >
                                   🎉 Your Ad is Ready!
-                                </h4>
+                                </motion.h4>
                                 <p className="text-gray-400">
                                   Check the Storyboard tab to see the detailed breakdown
                                 </p>
@@ -689,9 +700,23 @@ export function StudioPage() {
                                 {generatedScenes.map((scene) => (
                                   <AccordionItem key={scene.id} value={`scene-${scene.id}`} className="border-gray-700">
                                     <AccordionTrigger className="text-white hover:text-blue-400 font-bold">
-                                      <div className="flex items-center gap-3">
-                                        <Badge className="bg-blue-600">{scene.duration}</Badge>
-                                        <span className="text-left">{scene.title}</span>
+                                      <div className="flex items-center justify-between w-full">
+                                        <div className="flex items-center gap-3">
+                                          <Badge className="bg-blue-600">{scene.duration}</Badge>
+                                          <span className="text-left">{scene.title}</span>
+                                        </div>
+                                        <Button
+                                          size="sm"
+                                          variant="ghost"
+                                          onClick={(e) => {
+                                            e.stopPropagation();
+                                            setEditingScene(scene);
+                                            setIsEditModalOpen(true);
+                                          }}
+                                          className="text-gray-400 hover:text-blue-400 hover:bg-blue-500/10 mr-2"
+                                        >
+                                          <Edit className="w-4 h-4" />
+                                        </Button>
                                       </div>
                                     </AccordionTrigger>
                                     <AccordionContent className="text-gray-300 space-y-4">
@@ -742,6 +767,112 @@ export function StudioPage() {
           </div>
         </div>
       </div>
+
+      {/* Edit Scene Modal */}
+      <AnimatePresence>
+        {isEditModalOpen && editingScene && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50"
+              onClick={() => setIsEditModalOpen(false)}
+            />
+            
+            {/* Modal */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              className="fixed inset-0 z-50 flex items-center justify-center p-4"
+            >
+              <div className="bg-gray-900/95 backdrop-blur-xl border border-white/10 rounded-2xl p-6 w-full max-w-2xl max-h-[80vh] overflow-y-auto">
+                <div className="flex items-center justify-between mb-6">
+                  <h3 className="text-xl font-bold text-white flex items-center gap-2">
+                    <Edit className="w-5 h-5 text-blue-400" />
+                    Edit Scene: {editingScene.title}
+                  </h3>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setIsEditModalOpen(false)}
+                    className="text-gray-400 hover:text-white hover:bg-white/10"
+                  >
+                    <X className="w-5 h-5" />
+                  </Button>
+                </div>
+                
+                <div className="space-y-6">
+                  {/* Scene Title */}
+                  <div>
+                    <label className="text-sm font-semibold text-white mb-2 block">Scene Title</label>
+                    <input
+                      type="text"
+                      value={editingScene.title}
+                      onChange={(e) => setEditingScene({...editingScene, title: e.target.value})}
+                      className="w-full bg-gray-800/50 border border-gray-600 text-white rounded-xl px-4 py-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
+                    />
+                  </div>
+                  
+                  {/* Duration */}
+                  <div>
+                    <label className="text-sm font-semibold text-white mb-2 block">Duration</label>
+                    <input
+                      type="text"
+                      value={editingScene.duration}
+                      onChange={(e) => setEditingScene({...editingScene, duration: e.target.value})}
+                      className="w-full bg-gray-800/50 border border-gray-600 text-white rounded-xl px-4 py-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
+                      placeholder="e.g., 3s"
+                    />
+                  </div>
+                  
+                  {/* Visual Description */}
+                  <div>
+                    <label className="text-sm font-semibold text-white mb-2 block">Visual Description</label>
+                    <Textarea
+                      value={editingScene.visual}
+                      onChange={(e) => setEditingScene({...editingScene, visual: e.target.value})}
+                      className="min-h-24 bg-gray-800/50 border-gray-600 text-white rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
+                      placeholder="Describe the visual elements of this scene..."
+                    />
+                  </div>
+                  
+                  {/* Script */}
+                  <div>
+                    <label className="text-sm font-semibold text-white mb-2 block">Script</label>
+                    <Textarea
+                      value={editingScene.script}
+                      onChange={(e) => setEditingScene({...editingScene, script: e.target.value})}
+                      className="min-h-24 bg-gray-800/50 border-gray-600 text-white rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
+                      placeholder="Enter the script/narration for this scene..."
+                    />
+                  </div>
+                </div>
+                
+                {/* Modal Actions */}
+                <div className="flex gap-3 mt-8 justify-end">
+                  <Button
+                    variant="outline"
+                    onClick={() => setIsEditModalOpen(false)}
+                    className="border-gray-600 text-gray-300 hover:bg-gray-800"
+                  >
+                    Cancel
+                  </Button>
+                  <Button
+                    onClick={() => handleSceneEdit(editingScene)}
+                    className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white"
+                  >
+                    <Save className="w-4 h-4 mr-2" />
+                    Save Changes
+                  </Button>
+                </div>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
 
     </div>
   );
