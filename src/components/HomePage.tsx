@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import { 
   Play, 
   Zap, 
@@ -16,7 +15,6 @@ import {
   Mail,
   ArrowRight,
   Star,
-  FolderOpen,
   Calendar,
   Eye
 } from 'lucide-react';
@@ -157,14 +155,6 @@ export function HomePage() {
               <ArrowRight className="w-6 h-6 ml-3 group-hover:translate-x-1 transition-transform relative z-10" />
             </Button>
             
-            <Button 
-              variant="outline" 
-              size="lg"
-              className="px-12 py-8 text-xl font-bold rounded-2xl border-2 border-gray-600 text-gray-300 hover:bg-white/5 hover:border-gray-500 backdrop-blur-sm transition-all duration-300 hover:scale-105"
-            >
-              <FolderOpen className="w-6 h-6 mr-3" />
-              📂 View Projects
-            </Button>
           </motion.div>
 
           {/* Stats */}
