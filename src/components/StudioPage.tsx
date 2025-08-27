@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+// ...existing code...
+import { useState, useEffect } from 'react';
+import StudioBackgroundLayers from './StudioBackgroundLayers';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -198,7 +200,9 @@ export function StudioPage() {
 
   return (
     <div className="min-h-screen bg-gray-900 relative overflow-hidden">
-      {/* Previous Projects Panel */}
+  {/* Multi-layer Aurora/Particles Animated Background */}
+  <StudioBackgroundLayers />
+  {/* Previous Projects Panel */}
       <AnimatePresence>
         {isPanelOpen && (
           <>
@@ -361,14 +365,15 @@ export function StudioPage() {
         {/* Studio Content */}
         <div className="p-4 sm:p-6">
           <div className="max-w-7xl mx-auto">
-            <div className="grid lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 items-stretch gap-4 sm:gap-6 lg:gap-8 min-h-[500px]">
               {/* Creation Panel */}
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8 }}
+                className="flex flex-col h-full"
               >
-                <Card className="p-4 sm:p-6 lg:p-8 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl sm:rounded-3xl shadow-2xl">
+                <Card className="flex flex-col h-full p-6 lg:p-8 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl sm:rounded-3xl shadow-2xl">
                   {/* Script Input */}
                   <div className="space-y-4 mb-8">
                     <label className="text-lg font-bold text-white flex items-center gap-2">
@@ -503,9 +508,10 @@ export function StudioPage() {
                 initial={{ opacity: 0, x: 30 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8 }}
+                className="flex flex-col h-full"
               >
-                <Card className="p-4 sm:p-6 lg:p-8 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl sm:rounded-3xl h-full shadow-2xl">
-                  <Tabs value={activeTab} onValueChange={setActiveTab} className="h-full flex flex-col">
+                <Card className="flex flex-col h-full p-6 lg:p-8 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl sm:rounded-3xl shadow-2xl">
+                  <Tabs value={activeTab} onValueChange={setActiveTab} className="flex flex-col h-full">
                     <div className="flex items-center justify-between mb-6">
                       <TabsList className="grid w-full grid-cols-2 bg-gray-800/50 rounded-xl sm:rounded-2xl p-1 sm:p-2 max-w-md">
                         <TabsTrigger value="preview" className="rounded-lg sm:rounded-xl data-[state=active]:bg-blue-600 data-[state=active]:text-white font-bold transition-all duration-300 text-sm sm:text-base">
@@ -531,8 +537,8 @@ export function StudioPage() {
                       </div>
                     </div>
 
-                    <TabsContent value="preview" className="flex-1">
-                      <div className="h-full bg-gradient-to-br from-gray-800/50 to-gray-900/50 rounded-2xl flex flex-col min-h-96 relative overflow-hidden">
+                    <TabsContent value="preview" className="h-full flex flex-col flex-1">
+                      <div className="flex-1 h-full bg-gradient-to-br from-gray-800/50 to-gray-900/50 rounded-2xl flex flex-col min-h-[500px] relative overflow-hidden">
                         {/* Progress Tracker - Inside Live Preview Tab */}
                         <AnimatePresence>
                           {isGenerating && (
@@ -587,7 +593,7 @@ export function StudioPage() {
                         </AnimatePresence>
                         
                         {/* Preview Content */}
-                        <div className="flex-1 flex items-center justify-center p-4 sm:p-6">
+                        <div className="flex-1 flex items-center justify-center p-6">
                           <AnimatePresence mode="wait">
                             {isGenerating ? (
                               <motion.div
@@ -663,10 +669,10 @@ export function StudioPage() {
 
                     <TabsContent 
                       value="storyboard" 
-                      className="flex-1"
+                      className="h-full flex flex-col flex-1"
                     >
                       <motion.div 
-                        className="h-full"
+                        className="h-full flex flex-col flex-1 min-h-[500px]"
                         initial={{ opacity: 0, scale: 0.95 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 0.3 }}
