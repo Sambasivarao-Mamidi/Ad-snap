@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import HomeBackgroundLayers from './HomeBackgroundLayers'; // Correct ES import
+import HomeBackgroundLayers from './HomeBackgroundLayers';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -161,15 +161,9 @@ export function HomePage() {
       </section>
 
       {/* Previous Projects Section */}
-      <section className="py-20 px-4">
+    <section className="py-20 px-4 bg-gray-900/50 backdrop-blur-lg">
         <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
+          <div className="text-center mb-16">
             <h2 className="text-5xl md:text-6xl font-extrabold mb-6" style={{ textShadow: '0 0 30px rgba(168, 85, 247, 0.3)' }}>
               Previous{' '}
               <span className="bg-gradient-to-r from-orange-400 to-pink-400 bg-clip-text text-transparent">
@@ -179,29 +173,12 @@ export function HomePage() {
             <p className="text-xl text-white max-w-3xl mx-auto leading-relaxed font-medium tracking-wide">
               Explore our latest AI-generated ad campaigns and see the power of creative automation in action.
             </p>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            viewport={{ once: true }}
-          >
+          <div>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {projects.map((project, index) => (
-                <motion.div
-                  key={project.id}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  whileHover={{ 
-                    scale: 1.05,
-                    rotateY: 5,
-                    rotateX: 5,
-                  }}
-                  className="group perspective-1000"
-                >
+              {projects.map((project) => (
+                <div key={project.id} className="group perspective-1000">
                   <Card className="relative overflow-hidden bg-gray-800 backdrop-blur-xl border border-gray-600 rounded-3xl hover:border-blue-500 transition-all duration-500 hover:shadow-2xl">
                     <div className="relative">
                       <img
@@ -228,7 +205,6 @@ export function HomePage() {
                         </div>
                       </div>
                     </div>
-                    
                     <div className="p-6">
                       <div className="flex items-center justify-between">
                         <Button size="sm" variant="outline" className="border-gray-600 text-white hover:bg-gray-800">
@@ -242,33 +218,26 @@ export function HomePage() {
                         </div>
                       </div>
                     </div>
-
                     <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-600/50 to-purple-600/50 rounded-3xl opacity-0 group-hover:opacity-20 blur transition-opacity duration-500 -z-10" />
                   </Card>
-                </motion.div>
+                </div>
               ))}
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Features Section */}
-      <section className="py-20 px-4">
+    <section className="py-20 px-4 bg-gray-900/50 backdrop-blur-lg">
         <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
+          <div className="text-center mb-16">
             <h2 className="text-5xl md:text-6xl font-extrabold mb-6" style={{ textShadow: '0 0 30px rgba(34, 197, 94, 0.3)' }}>
               Why Choose{' '}
               <span className="bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">
                 AdSnap?
               </span>
             </h2>
-          </motion.div>
+          </div>
 
           <div className="grid md:grid-cols-3 gap-8">
             {[
@@ -293,22 +262,10 @@ export function HomePage() {
                 gradient: 'from-orange-600 to-red-600',
                 color: 'text-orange-400'
               }
-            ].map((feature, index) => {
+            ].map((feature) => {
               const Icon = feature.icon;
               return (
-                <motion.div
-                  key={feature.title}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.2 }}
-                  viewport={{ once: true }}
-                  whileHover={{ 
-                    scale: 1.05,
-                    rotateY: 5,
-                    rotateX: 5,
-                  }}
-                  className="group perspective-1000"
-                >
+                <div key={feature.title} className="group perspective-1000">
                   <Card className="relative p-8 h-full bg-gray-800 backdrop-blur-xl border border-gray-600 rounded-3xl hover:border-gray-500 transition-all duration-500 hover:shadow-2xl overflow-hidden">
                     <div className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500`} />
                     
@@ -326,7 +283,7 @@ export function HomePage() {
 
                     <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-600 to-purple-600 rounded-3xl opacity-0 group-hover:opacity-20 blur transition-opacity duration-500 -z-10" />
                   </Card>
-                </motion.div>
+                </div>
               );
             })}
           </div>
@@ -334,30 +291,22 @@ export function HomePage() {
       </section>
 
       {/* Footer */}
-      <footer className="relative py-20 px-4 border-t border-white/10" style={{ borderImage: 'linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.5), transparent) 1' }}>
+  <footer className="relative py-20 px-4 border-t border-white/10 bg-gray-900/50 backdrop-blur-lg" style={{ borderImage: 'linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.5), transparent) 1' }}>
         <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent" />
         
         <div className="relative max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
+          <div>
             <div className="grid md:grid-cols-4 gap-12 mb-16">
               {/* Brand Section */}
               <div className="md:col-span-2">
-                <motion.div
-                  className="mb-6"
-                  whileHover={{ scale: 1.05 }}
-                >
+                <div className="mb-6">
                   <h3 className="text-4xl font-extrabold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
                     AdSnap
                   </h3>
                   <p className="text-white mt-2 text-lg font-medium">
                     AI-Powered Ad Creation Studio
                   </p>
-                </motion.div>
+                </div>
                 
                 <p className="text-white text-lg leading-relaxed mb-8 max-w-md font-medium tracking-wide">
                   Transform your ideas into viral video ads instantly. 
@@ -386,13 +335,12 @@ export function HomePage() {
                 <ul className="space-y-4">
                   {['Features', 'Pricing', 'Templates', 'API Docs'].map((link) => (
                     <li key={link}>
-                      <motion.a
+                      <a
                         href="#"
                         className="text-white hover:text-blue-300 transition-colors duration-200 font-medium tracking-wide"
-                        whileHover={{ x: 5 }}
                       >
                         {link}
-                      </motion.a>
+                      </a>
                     </li>
                   ))}
                 </ul>
@@ -403,13 +351,12 @@ export function HomePage() {
                 <ul className="space-y-4">
                   {['Help Center', 'Contact', 'Privacy', 'Terms'].map((link) => (
                     <li key={link}>
-                      <motion.a
+                      <a
                         href="#"
                         className="text-white hover:text-blue-300 transition-colors duration-200 font-medium tracking-wide"
-                        whileHover={{ x: 5 }}
                       >
                         {link}
-                      </motion.a>
+                      </a>
                     </li>
                   ))}
                 </ul>
@@ -422,48 +369,31 @@ export function HomePage() {
                 { icon: Twitter, href: '#', label: 'Twitter', color: 'hover:text-blue-400' },
                 { icon: Github, href: '#', label: 'GitHub', color: 'hover:text-gray-300' },
                 { icon: Linkedin, href: '#', label: 'LinkedIn', color: 'hover:text-blue-500' }
-              ].map((social, index) => {
+              ].map((social) => {
                 const Icon = social.icon;
                 return (
-                  <motion.a
+                  <a
                     key={social.label}
                     href={social.href}
                     className={`w-14 h-14 rounded-full bg-gray-800 backdrop-blur-sm border border-gray-600 hover:border-gray-500 flex items-center justify-center text-white ${social.color} transition-all duration-300 hover:shadow-lg hover:shadow-blue-500`}
-                    whileHover={{ scale: 1.1, y: -2 }}
-                    whileTap={{ scale: 0.95 }}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.1 }}
                     style={{ boxShadow: '0 0 20px rgba(59, 130, 246, 0.2)' }}
                   >
                     <Icon className="w-6 h-6" />
-                  </motion.a>
+                  </a>
                 );
               })}
             </div>
 
             {/* Bottom Section */}
             <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-gray-600">
-              <motion.div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                viewport={{ once: true }}
-                className="flex items-center gap-2 text-white mb-4 md:mb-0 font-medium tracking-wide"
-              >
+              <div className="flex items-center gap-2 text-white mb-4 md:mb-0 font-medium tracking-wide">
                 <span>© 2024 AdSnap. All rights reserved.</span>
                 <span className="hidden md:inline">•</span>
                 <span className="flex items-center gap-1">
                   Made with <Heart className="w-4 h-4 text-red-500 animate-pulse" /> by AdSnap Team
                 </span>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.3 }}
-                viewport={{ once: true }}
-              >
+              </div>
+              <div>
                 <Button
                   variant="outline"
                   size="sm"
@@ -473,9 +403,9 @@ export function HomePage() {
                   <ArrowRight className="w-4 h-4 mr-2 rotate-[-90deg]" />
                   Back to Top
                 </Button>
-              </motion.div>
+              </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </footer>
     </div>

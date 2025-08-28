@@ -10,7 +10,7 @@ function App() {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="adsnap-theme">
       <Router>
-        <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white overflow-x-hidden">
+  <div className="h-full bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white overflow-x-hidden">
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}

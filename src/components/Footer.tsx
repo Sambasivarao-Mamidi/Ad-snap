@@ -28,16 +28,16 @@ export function Footer() {
                 whileHover={{ scale: 1.05 }}
               >
                 <h3 className="text-4xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                  AdSnap
+                  <span className="text-white">AdSnap</span>
                 </h3>
                 <p className="text-gray-400 mt-2 text-lg">
-                  AI-Powered Ad Creation Platform
+                  <span className="text-white">AI-Powered Ad Creation Platform</span>
                 </p>
               </motion.div>
               
               <p className="text-gray-300 text-lg leading-relaxed mb-8 max-w-md">
-                Transform your ideas into viral video ads in just 13 seconds. 
-                Join thousands of creators who trust AdSnap for their marketing success.
+                <span className="text-white">Transform your ideas into viral video ads in just 13 seconds. 
+                Join thousands of creators who trust AdSnap for their marketing success.</span>
               </p>
 
               {/* Newsletter Signup */}
@@ -64,7 +64,7 @@ export function Footer() {
                   <li key={link}>
                     <motion.a
                       href="#"
-                      className="text-gray-400 hover:text-white transition-colors duration-200"
+                      className="text-white transition-colors duration-200"
                       whileHover={{ x: 5 }}
                     >
                       {link}
@@ -82,7 +82,7 @@ export function Footer() {
                   <li key={link}>
                     <motion.a
                       href="#"
-                      className="text-gray-400 hover:text-white transition-colors duration-200"
+                      className="text-white transition-colors duration-200"
                       whileHover={{ x: 5 }}
                     >
                       {link}
@@ -129,9 +129,9 @@ export function Footer() {
               viewport={{ once: true }}
               className="flex items-center gap-2 text-gray-400 mb-4 md:mb-0"
             >
-              <span>© 2024 AdSnap. All rights reserved.</span>
-              <span className="hidden md:inline">•</span>
-              <span className="flex items-center gap-1">
+              <span className="text-white">© 2024 AdSnap. All rights reserved.</span>
+              <span className="hidden md:inline text-white">•</span>
+              <span className="flex items-center gap-1 text-white">
                 Made with <Heart className="w-4 h-4 text-red-500 animate-pulse" /> by AdSnap
               </span>
             </motion.div>
