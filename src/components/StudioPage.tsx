@@ -185,7 +185,7 @@ export function StudioPage() {
 
       <main className="p-4 sm:p-6 flex-1">
         <div className="max-w-7xl mx-auto h-full">
-          <div className="grid grid-cols-1 md:grid-cols-2 items-stretch gap-4 sm:gap-6 lg:gap-8 h-full">
+          <div className="grid grid-cols-1 md:grid-cols-2 items-start gap-4 sm:gap-6 lg:gap-8 h-full">
             
             <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }}>
               <Card className="h-full p-6 lg:p-8 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl sm:rounded-3xl shadow-2xl">
@@ -248,7 +248,7 @@ export function StudioPage() {
                   </div>
                   
                   <TabsContent value="preview" className="flex-1">
-                    <div className={`h-full bg-gradient-to-br from-gray-800/50 to-gray-900/50 rounded-2xl flex flex-col relative overflow-hidden transition-all duration-1000 ${showPulse ? 'shadow-[0_0_50px_rgba(59,130,246,0.6)]' : ''}`}>
+                    <div className={`flex flex-col h-full overflow-hidden bg-gradient-to-br from-gray-800/50 to-gray-900/50 rounded-2xl relative transition-all duration-1000 ${showPulse ? 'shadow-[0_0_50px_rgba(59,130,246,0.6)]' : ''}`}>
                       <AnimatePresence>
                         {isGenerating && (
                           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="p-6 border-b border-white/10 space-y-4">
@@ -268,7 +268,7 @@ export function StudioPage() {
                           </motion.div>
                         )}
                       </AnimatePresence>
-                      <div className="flex-1 flex items-center justify-center p-6">
+                      <div className="flex-1 flex flex-col p-6 pt-12">
                         <AnimatePresence mode="wait">
                           {isGenerating ? (
                             <motion.div key="generating" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="text-center">
@@ -283,7 +283,7 @@ export function StudioPage() {
                               <p className="text-gray-400">Check the Storyboard tab for details</p>
                             </motion.div>
                           ) : (
-                            <motion.div key="empty-preview" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center">
+                            <motion.div key="empty-preview" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex flex-1 flex-col items-center text-center pt-8">
                               <div className="w-20 h-20 rounded-full bg-gradient-to-r from-gray-600 to-gray-700 flex items-center justify-center mb-6 mx-auto"><Play className="w-10 h-10 text-gray-400" /></div>
                               <h4 className="text-xl font-bold text-white mb-2">Live preview will appear here</h4>
                               <p className="text-gray-400">Generate your ad to see the magic ✨</p>
